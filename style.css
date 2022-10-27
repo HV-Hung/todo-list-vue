@@ -1,0 +1,78 @@
+* {
+  font-size: 1.5rem;
+}
+body {
+  background-color: rgb(232, 232, 232);
+}
+#root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+h1 {
+  font-size: 2rem;
+}
+p {
+  margin: 15px 5px;
+  cursor: pointer;
+  width: 100%;
+}
+.container {
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  margin-top: 50px;
+  transform: translateX(-50%);
+  padding: 40px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.add-todo {
+  display: flex;
+  justify-content: space-between;
+}
+input {
+  padding: 5px;
+  border-radius: 10px;
+  flex: 1;
+  border: solid 1px rgb(212, 212, 212);
+}
+button {
+  margin-left: 10px;
+  border-radius: 10px;
+  border: solid 1px rgb(212, 212, 212);
+  cursor: pointer;
+}
+.add {
+  background-color: #1890ff;
+  color: #fff;
+  width: 209px;
+}
+
+.todo-list {
+  text-align: start;
+  margin-left: auto;
+  margin-right: auto;
+}
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  border: solid 1px rgb(212, 212, 212);
+  margin-top: 20px;
+  padding: 0px 20px;
+}
+.todo .remove {
+  background-color: rgb(255, 255, 255);
+  color: rgb(180, 0, 0);
+  border: 2px solid rgb(180, 0, 0);
+}
+.inactive {
+  background-color: rgb(232, 232, 232);
+}
+.inactive p {
+  text-decoration: line-through;
+}

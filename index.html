@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo list</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="root">
+      <div class="container">
+        <h1>Todo list</h1>
+        <div class="add-todo">
+          <input v-model="newTodo" type="text" placeholder="New todo" />
+          <button class="add" @click="addTodo">Add</button>
+        </div>
+        <div class="todo-list">
+          <div
+            v-for="todo in todoList"
+            class="todo"
+            :class="{inactive:todo.status}"
+          >
+            <p @click="changeStatus(todo.id)">{{todo.todo}}</p>
+            <button
+              v-if="todo.status"
+              @click="removeTodo(todo.id)"
+              class="remove"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            newTodo: "",
+            todoList: [
+              {
+                id: 1,
+                todo: "Finish homework",
+                status: true,
+              },
+              {
+                id: 2,
+                todo: "Do exercise",
+                status: false,
+              },
+              {
+                id: 3,
+                todo: "Cooking",
+                status: false,
+              },
+              {
+                id: 4,
+                todo: "Study",
+                status: false,
+              },
+            ],
+          };
+        },
+
+        methods: {
+          addTodo() {
+            if (this.newTodo != "") {
+              var id;
+              if (this.todoList.length === 0) {
+                id = 1;
+              } else {
+                id = Math.max(...this.todoList.map((todo) => todo.id)) + 1;
+              }
+
+              const newTodoItem = {
+                id: id,
+                todo: this.newTodo,
+                status: false,
+              };
+              console.log(newTodoItem);
+              this.todoList.push(newTodoItem);
+              this.newTodo = "";
+            }
+          },
+          removeTodo(id) {
+            this.todoList = this.todoList.filter((todo) => todo.id !== id);
+          },
+          changeStatus(id) {
+            index = this.todoList.findIndex((todo) => todo.id === id);
+            this.todoList[index].status = !this.todoList[index].status;
+          },
+        },
+      });
+
+      const mountedApp = app.mount("#root");
+    </script>
+  </body>
+</html>
