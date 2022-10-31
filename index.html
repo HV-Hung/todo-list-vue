@@ -13,6 +13,11 @@
     <div id="root">
       <div :class="classContainer">
         <h1>{{appName}}</h1>
+        <h2>New todo: {{newTodo}}</h2>
+        <div class="add-todo">
+          <input v-model="newTodo" type="text" placeholder="New todo" />
+        </div>
+
         <div class="todo-list">
           <div
             v-for="todo in todoList"
@@ -29,6 +34,7 @@
       const app = Vue.createApp({
         data() {
           return {
+            newTodo: "",
             appName: "Todo List",
             classContainer: "container",
             todoList: [
