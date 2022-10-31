@@ -13,6 +13,7 @@
     <div id="root">
       <div :class="classContainer">
         <h1>{{appName}}</h1>
+        <h2>Amount of work: {{todoCounter}}</h2>
         <h2>New todo: {{newTodo}}</h2>
         <div class="add-todo">
           <input v-model="newTodo" type="text" placeholder="New todo" />
@@ -91,6 +92,11 @@
           changeStatus(id) {
             index = this.todoList.findIndex((todo) => todo.id === id);
             this.todoList[index].status = !this.todoList[index].status;
+          },
+        },
+        computed: {
+          todoCounter() {
+            return this.todoList.length;
           },
         },
       });
