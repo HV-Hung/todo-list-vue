@@ -20,20 +20,15 @@
         </div>
 
         <div class="todo-list">
-          <div
+          <todo
             v-for="todo in todoList"
-            class="todo"
-            :class="{inactive:todo.status}"
-          >
-            <p @click="changeStatus(todo.id)">{{todo.todo}}</p>
-            <button
-              v-if="todo.status"
-              @click="removeTodo(todo.id)"
-              class="remove"
-            >
-              Remove
-            </button>
-          </div>
+            :todo="todo.todo"
+            :id="todo.id"
+            :status="todo.status"
+            key="todo.id"
+            @remove-todo="removeTodo"
+            @change-status="changeStatus"
+          ></todo>
         </div>
       </div>
     </div>
@@ -93,6 +88,26 @@
             this.todoList[index].status = !this.todoList[index].status;
           },
         },
+      });
+      app.component("todo", {
+        props: ["todo", "status", "id"],
+        data() {
+          return {};
+        },
+        template: `<div
+            class="todo"
+            :class="{inactive:status}"
+            :key="id"
+          >
+            <p @click="$emit('changeStatus',id)">{{todo}}</p>
+            <button
+              v-if="status"
+              @click="$emit('removeTodo',id)"
+              class="remove"
+            >
+              Remove
+            </button>
+          </div>`,
       });
       const mountedApp = app.mount("#root");
     </script>
