@@ -25,14 +25,7 @@
             class="todo"
             :class="{inactive:todo.status}"
           >
-            <p @click="changeStatus(todo.id)">{{todo.todo}}</p>
-            <button
-              v-if="todo.status"
-              @click="removeTodo(todo.id)"
-              class="remove"
-            >
-              Remove
-            </button>
+            <p>{{todo.todo}}</p>
           </div>
         </div>
       </div>
@@ -83,14 +76,6 @@
               this.todoList.push(newTodoItem);
               this.newTodo = "";
             }
-          },
-          removeTodo(id) {
-            console.log(id);
-            this.todoList = this.todoList.filter((todo) => todo.id !== id);
-          },
-          changeStatus(id) {
-            index = this.todoList.findIndex((todo) => todo.id === id);
-            this.todoList[index].status = !this.todoList[index].status;
           },
         },
       });
