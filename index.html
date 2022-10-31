@@ -13,6 +13,14 @@
     <div id="root">
       <div :class="classContainer">
         <h1>{{appName}}</h1>
+        <div class="todo-list">
+          <div
+            v-for="todo in todoList"
+            class="todo"
+            :class="{inactive:todo.status}"
+          >
+            <p>{{todo.todo}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -22,7 +30,24 @@
         data() {
           return {
             appName: "Todo List",
-            classContainer:"container"
+            classContainer: "container",
+            todoList: [
+              {
+                id: 1,
+                todo: "Finish homework",
+                status: true,
+              },
+              {
+                id: 2,
+                todo: "Do exercise",
+                status: false,
+              },
+              {
+                id: 3,
+                todo: "Cooking",
+                status: false,
+              },
+            ],
           };
         },
         methods: {},
