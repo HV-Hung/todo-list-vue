@@ -16,6 +16,7 @@
         <h2>New todo: {{newTodo}}</h2>
         <div class="add-todo">
           <input v-model="newTodo" type="text" placeholder="New todo" />
+          <button class="add" @click="addTodo">Add</button>
         </div>
 
         <div class="todo-list">
@@ -24,7 +25,14 @@
             class="todo"
             :class="{inactive:todo.status}"
           >
-            <p>{{todo.todo}}</p>
+            <p @click="changeStatus(todo.id)">{{todo.todo}}</p>
+            <button
+              v-if="todo.status"
+              @click="removeTodo(todo.id)"
+              class="remove"
+            >
+              Remove
+            </button>
           </div>
         </div>
       </div>
@@ -56,7 +64,35 @@
             ],
           };
         },
-        methods: {},
+        methods: {
+          addTodo() {
+            if (this.newTodo != "") {
+              var id;
+              if (this.todoList.length === 0) {
+                id = 1;
+              } else {
+                id = Math.max(...this.todoList.map((todo) => todo.id)) + 1;
+              }
+
+              const newTodoItem = {
+                id: id,
+                todo: this.newTodo,
+                status: false,
+              };
+
+              this.todoList.push(newTodoItem);
+              this.newTodo = "";
+            }
+          },
+          removeTodo(id) {
+            console.log(id);
+            this.todoList = this.todoList.filter((todo) => todo.id !== id);
+          },
+          changeStatus(id) {
+            index = this.todoList.findIndex((todo) => todo.id === id);
+            this.todoList[index].status = !this.todoList[index].status;
+          },
+        },
       });
       const mountedApp = app.mount("#root");
     </script>
