@@ -11,14 +11,18 @@
 
   <body>
     <div id="root">
-      <h1>{{appName}}</h1>
-      <h1>{{ 1+ 1}}</h1>
+      <div :class="classContainer">
+        <h1>{{appName}}</h1>
+        </div>
+      </div>
     </div>
+
     <script>
       const app = Vue.createApp({
         data() {
           return {
             appName: "Todo List",
+            classContainer:"container"
           };
         },
         methods: {},
